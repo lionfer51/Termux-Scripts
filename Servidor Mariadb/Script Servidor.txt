@@ -1,0 +1,45 @@
+//Instalando mariadb
+//Actualizando Paquetes
+apt update & apt upgrade
+//Instalando mariadb
+pkg install mariadb
+//Creando directorios de mariadb
+mysql_install_db
+//Revisando Si existe la carpeta my.cnf.d
+cd /data/data/com.termux.files/usr/etc
+//Luego lista el contenido con:
+ls
+//Y si no aparece la carpeta llamada my.cnf.d hay que crearla con:
+mkdir my.cnf.d
+//Entramos a la carpeta y creamos el archivo de configuración con nano
+nano my.cnf
+//Insertamos datos en my.cnf y guardamos
+[mysqld]
+bind-address=0.0.0.0
+port=3306
+//Iniciando servidor, mientras esta sesión esté abierta la base de datos estará encendida
+mysqld_safe -u root &
+//Abriendo nueva sesión
+//Insertamos lo siguiente, para cambiar la contraseña en new_password
+mysql
+SET PASSWORD FOR 'root'@'localhost' = PASSWORD('new_password');
+//CTRL+Z para salir de mysql
+mysql -u root -p
+//Insertamos new_password
+//CREANDO USUARIO parzibyte con contraseña hunter y host %, cambia los valores a conveniencia
+CREATE USER 'parzibyte'@'%' IDENTIFIED BY 'hunter2';
+FLUSH PRIVILEGES;
+//Damos todos los permisos al usuario con host localhost
+GRANT ALL PRIVILEGES ON *.* TO 'parzibyte'@'localhost';
+
+//Para conectarnos al servidor de base de datos debemos conocer la ip, la buscamos
+ifconfig
+//El IP_SERVDOR está al lado de inet y tiene este formato 192.168.1.*
+//Conectamos al usuario parzibyte al servidor con el siguiente comando
+mysql -h IP_SERVDOR -u parzibyte -p
+//Fin del Tutorial
+
+//Extras
+//Revisando usuarios y hosts
+SELECT USER,HOST FROM mysql.user;
+
