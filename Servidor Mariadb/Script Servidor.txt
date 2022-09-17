@@ -1,9 +1,9 @@
-//Instalando mariadb
+//Instalando MariaDB
 //Actualizando Paquetes
 apt update & apt upgrade
-//Instalando mariadb
-pkg install mariadb
-//Creando directorios de mariadb
+//Instalando MariaDB
+pkg install MariaDB
+//Creando directorios de MariaDB
 mysql_install_db
 //Revisando Si existe la carpeta my.cnf.d
 cd /data/data/com.termux.files/usr/etc
